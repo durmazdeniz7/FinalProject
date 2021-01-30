@@ -40,9 +40,18 @@ namespace DataAccess.Concrete.InMemory
             return _products;
         }
 
+        public List<Product> GetAllByCategory(int categoryId)
+        {
+           return _products.Where(p => p.CategoryId == categoryId).ToList();
+        }
+
         public void Update(Product product)
         {
-            throw new NotImplementedException();
+            Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
+            productToUpdate.ProductName = product.ProductName;
+            productToUpdate.CategoryId = product.CategoryId;
+            productToUpdate.UnitPrice = product.UnitPrice;
+            productToUpdate.UnitsInStock = product.UnitsInStock;
         }
     }
 }
